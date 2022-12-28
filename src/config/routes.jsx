@@ -1,7 +1,7 @@
 import {
 RegisterProductPage,
   HomePage,
-
+  UpdateProductPage
 } from "../pages";
 
 const routes = () => {
@@ -14,6 +14,8 @@ const routes = () => {
       path: "/newproduct",
       element: <RegisterProductPage />,
     },
+    { path:"/productupdate/:productId" ,
+    element : <UpdateProductPage />}
   
   ];
 };

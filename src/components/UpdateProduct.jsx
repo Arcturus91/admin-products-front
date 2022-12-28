@@ -3,25 +3,63 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container"
+import { Container } from "@mui/material/";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { /* Link, */ useLocation, useNavigate } from "react-router-dom";
-import { registerWs } from "../services/crud-ws";
-import {Copyright} from "./index"
+import { useParams } from "react-router-dom";
+import { updateWs } from "../services/crud-ws";
+import { useNavigate } from "react-router-dom";
+import { Copyright } from "./index";
+import { getSingleProduct } from "../services/crud-ws";
+import { useEffect, useState } from "react";
 
 const theme = createTheme();
 
-export default function RegisterProduct() {
-  const location = useLocation();
-
+export default function UpdateProduct() {
+  const [product, setproduct] = useState({
+    name: "",
+    category: {
+      name: "",
+      slug: "",
+    },
+    brand: {
+      name: "",
+      slug: "",
+    },
+    slug: "",
+    status: "",
+  });
   const navigate = useNavigate();
+  const { productId } = useParams();
+  /* 
+  {
+ 
+  "name": "",
+  "category": {
+      "name": "",
+      "slug": ""
+  },
+  "brand": {
+      "name": "",
+      "slug": ""
+  },
+  "slug": "",
+  "status": ""
+} 
+*/
 
+  useEffect(() => {
+    getSingleProduct(productId).then((data) => {
+      setproduct(data.data);
+    });
+  }, []);
+
+  console.log(product.category);
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -35,25 +73,22 @@ export default function RegisterProduct() {
       name: data.get("brandName"),
       slug: data.get("brandSlug"),
     };
-    
 
     let values = {
       name: data.get("name"),
       status: data.get("status"),
       slug: data.get("slug"),
       category: categoryPost,
-      brand:brandPost
+      brand: brandPost,
     };
 
-
-
-    registerWs(values).then((res) => {
+    updateWs(values, productId).then((res) => {
       const { data, status, errorMessage } = res;
       if (status) {
-        navigate("/")
+        navigate("/");
         return;
       } else {
-        console.log(errorMessage);
+        console.log("axios error", errorMessage);
       }
     });
   };
@@ -93,7 +128,7 @@ export default function RegisterProduct() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Product Registration
+              Product Update
             </Typography>
             <Box
               component="form"
@@ -103,7 +138,7 @@ export default function RegisterProduct() {
             >
               <TextField
                 margin="normal"
-                required
+             //value={product.name}
                 fullWidth
                 id="name"
                 label="Product Name"
@@ -114,7 +149,7 @@ export default function RegisterProduct() {
 
               <TextField
                 margin="normal"
-                required
+                //value={product.category.name}
                 fullWidth
                 id="catName"
                 label="Category Name"
@@ -125,7 +160,7 @@ export default function RegisterProduct() {
 
               <TextField
                 margin="normal"
-                required
+                //value={product.category.slug}
                 fullWidth
                 id="catSlug"
                 label="Category Slug"
@@ -136,7 +171,7 @@ export default function RegisterProduct() {
 
               <TextField
                 margin="normal"
-                required
+                //value={product.brand.name}
                 fullWidth
                 id="brandName"
                 label="Brand Name"
@@ -147,7 +182,7 @@ export default function RegisterProduct() {
 
               <TextField
                 margin="normal"
-                required
+                //value={product.brand.slug}
                 fullWidth
                 id="brandSlug"
                 label="Brand Slug"
@@ -158,7 +193,7 @@ export default function RegisterProduct() {
 
               <TextField
                 margin="normal"
-                required
+                //value={product.slug}
                 fullWidth
                 id="slug"
                 label="Product Slug"
@@ -169,7 +204,7 @@ export default function RegisterProduct() {
 
               <TextField
                 margin="normal"
-                required
+                //value={product.status}
                 fullWidth
                 id="status"
                 label="Product Status"
@@ -189,15 +224,13 @@ export default function RegisterProduct() {
               >
                 Save
               </Button>
-              
+
               <Container align="center">
-                
                 <Link href="/" variant="body2">
-                    {"Check all products instead"}
-                  </Link>
-                
+                  {"Check all products instead"}
+                </Link>
               </Container>
-              <Copyright sx={{ mt: 5 }} />
+              <Copyright />
             </Box>
           </Box>
         </Grid>

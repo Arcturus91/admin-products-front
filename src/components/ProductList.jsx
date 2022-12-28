@@ -6,9 +6,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
-import Tooltip from "@mui/material/Tooltip";
+import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../services/crud-ws";
+import DeleteButton from "./DeleteButton";
 
 export default function ProductList() {
   const [products, setproducts] = useState([]);
@@ -29,8 +30,11 @@ export default function ProductList() {
           <TableRow>
             <TableCell>User ID</TableCell>
             <TableCell align="center">Name</TableCell>
+            <TableCell align="center">Category</TableCell>
+            <TableCell align="center">Brand</TableCell>
             <TableCell align="center">Slug</TableCell>
             <TableCell align="center">Status</TableCell>
+            <TableCell align="center">Update / Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -43,13 +47,17 @@ export default function ProductList() {
                 <TableCell component="th" scope="row">
                   {row._id}
                 </TableCell>
-                <TableCell align="right">
-                  <Tooltip title="Copy the address and click">
-                    <Link to="/sendSolana">{row.name}</Link>
-                  </Tooltip>
+                <TableCell align="center">{row.name}</TableCell>
+                <TableCell align="center">{row.category.name}</TableCell>
+                <TableCell align="center">{row.brand.name}</TableCell>
+                <TableCell align="center">{row.slug}</TableCell>
+                <TableCell align="center">{row.status}</TableCell>
+                <TableCell align="center">
+                  <Button variant="outlined">
+                    <Link style={{textDecoration:"none",color:"inherit"}} to={`/productupdate/${row._id}`}>Update</Link>
+                  </Button>
+                  <DeleteButton id={row._id} />
                 </TableCell>
-                <TableCell align="right">{row.slug}</TableCell>
-                <TableCell align="right">{row.status}</TableCell>
               </TableRow>
             </>
           ))}
