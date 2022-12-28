@@ -1,11 +1,10 @@
 import * as React from "react";
-import { AppBar, Toolbar, Typography, Container, Button } from "@mui/material/";
+import { AppBar, Toolbar, Container, Button } from "@mui/material/";
 import LoginIcon from "@mui/icons-material/Login";
 import { Link } from "react-router-dom";
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from "@mui/icons-material/Home";
 
 //
-
 
 const Navbar = () => {
   return (
@@ -19,10 +18,7 @@ const Navbar = () => {
           <div>
             <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
               <div className="Nav-Bar">
-              <Button
-                  variant="contained"
-                  endIcon={<HomeIcon />}
-                >
+                <Button variant="contained" endIcon={<HomeIcon />}>
                   Home
                 </Button>
               </div>
@@ -44,7 +40,6 @@ const Navbar = () => {
                 </Button>
               </Link>
             </div>
- 
           </div>
         </Toolbar>
       </Container>

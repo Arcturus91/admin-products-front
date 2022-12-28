@@ -15,51 +15,13 @@ import { useParams } from "react-router-dom";
 import { updateWs } from "../services/crud-ws";
 import { useNavigate } from "react-router-dom";
 import { Copyright } from "./index";
-import { getSingleProduct } from "../services/crud-ws";
-import { useEffect, useState } from "react";
 
 const theme = createTheme();
 
 export default function UpdateProduct() {
-  const [product, setproduct] = useState({
-    name: "",
-    category: {
-      name: "",
-      slug: "",
-    },
-    brand: {
-      name: "",
-      slug: "",
-    },
-    slug: "",
-    status: "",
-  });
   const navigate = useNavigate();
   const { productId } = useParams();
-  /* 
-  {
- 
-  "name": "",
-  "category": {
-      "name": "",
-      "slug": ""
-  },
-  "brand": {
-      "name": "",
-      "slug": ""
-  },
-  "slug": "",
-  "status": ""
-} 
-*/
 
-  useEffect(() => {
-    getSingleProduct(productId).then((data) => {
-      setproduct(data.data);
-    });
-  }, []);
-
-  console.log(product.category);
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -83,7 +45,7 @@ export default function UpdateProduct() {
     };
 
     updateWs(values, productId).then((res) => {
-      const { data, status, errorMessage } = res;
+      const { status, errorMessage } = res;
       if (status) {
         navigate("/");
         return;
@@ -138,7 +100,6 @@ export default function UpdateProduct() {
             >
               <TextField
                 margin="normal"
-             //value={product.name}
                 fullWidth
                 id="name"
                 label="Product Name"
@@ -149,7 +110,6 @@ export default function UpdateProduct() {
 
               <TextField
                 margin="normal"
-                //value={product.category.name}
                 fullWidth
                 id="catName"
                 label="Category Name"
@@ -160,7 +120,6 @@ export default function UpdateProduct() {
 
               <TextField
                 margin="normal"
-                //value={product.category.slug}
                 fullWidth
                 id="catSlug"
                 label="Category Slug"
@@ -171,7 +130,6 @@ export default function UpdateProduct() {
 
               <TextField
                 margin="normal"
-                //value={product.brand.name}
                 fullWidth
                 id="brandName"
                 label="Brand Name"
@@ -182,7 +140,6 @@ export default function UpdateProduct() {
 
               <TextField
                 margin="normal"
-                //value={product.brand.slug}
                 fullWidth
                 id="brandSlug"
                 label="Brand Slug"
@@ -193,7 +150,6 @@ export default function UpdateProduct() {
 
               <TextField
                 margin="normal"
-                //value={product.slug}
                 fullWidth
                 id="slug"
                 label="Product Slug"
@@ -204,7 +160,6 @@ export default function UpdateProduct() {
 
               <TextField
                 margin="normal"
-                //value={product.status}
                 fullWidth
                 id="status"
                 label="Product Status"
@@ -222,7 +177,7 @@ export default function UpdateProduct() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Save
+                Update
               </Button>
 
               <Container align="center">

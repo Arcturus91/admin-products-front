@@ -1,8 +1,4 @@
-import {
-RegisterProductPage,
-  HomePage,
-  UpdateProductPage
-} from "../pages";
+import { RegisterProductPage, HomePage, UpdateProductPage } from "../pages";
 
 const routes = () => {
   return [
@@ -14,9 +10,7 @@ const routes = () => {
       path: "/newproduct",
       element: <RegisterProductPage />,
     },
-    { path:"/productupdate/:productId" ,
-    element : <UpdateProductPage />}
-  
+    { path: "/productupdate/:productId", element: <UpdateProductPage /> },
   ];
 };
 

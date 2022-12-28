@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function DeleteButton(props) {
   const { id } = props;
   const [open, setOpen] = React.useState(false);
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -21,16 +21,15 @@ const navigate = useNavigate()
   const deleteProduct = () => {
     setOpen(false);
     deleteWs(id).then((res) => {
-        const { data, status, errorMessage } = res;
-        if (status) {
-          console.log("product deleted successfully");
-navigate("/")
-          return;
-        } else {
-          console.log("axios error", errorMessage);
-        }
-      });
-
+      const { status, errorMessage } = res;
+      if (status) {
+        console.log("product deleted successfully");
+        navigate("/");
+        return;
+      } else {
+        console.log("axios error", errorMessage);
+      }
+    });
   };
 
   return (
@@ -50,7 +49,7 @@ navigate("/")
 
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={ deleteProduct} autoFocus>
+          <Button onClick={deleteProduct} autoFocus>
             Delete
           </Button>
         </DialogActions>

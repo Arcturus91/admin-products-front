@@ -7,19 +7,17 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container"
+import Container from "@mui/material/Container";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { /* Link, */ useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { registerWs } from "../services/crud-ws";
-import {Copyright} from "./index"
+import { Copyright } from "./index";
 
 const theme = createTheme();
 
 export default function RegisterProduct() {
-  const location = useLocation();
-
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -35,22 +33,19 @@ export default function RegisterProduct() {
       name: data.get("brandName"),
       slug: data.get("brandSlug"),
     };
-    
 
     let values = {
       name: data.get("name"),
       status: data.get("status"),
       slug: data.get("slug"),
       category: categoryPost,
-      brand:brandPost
+      brand: brandPost,
     };
 
-
-
     registerWs(values).then((res) => {
-      const { data, status, errorMessage } = res;
+      const { status, errorMessage } = res;
       if (status) {
-        navigate("/")
+        navigate("/");
         return;
       } else {
         console.log(errorMessage);
@@ -189,13 +184,11 @@ export default function RegisterProduct() {
               >
                 Save
               </Button>
-              
+
               <Container align="center">
-                
                 <Link href="/" variant="body2">
-                    {"Check all products instead"}
-                  </Link>
-                
+                  {"Check all products instead"}
+                </Link>
               </Container>
               <Copyright sx={{ mt: 5 }} />
             </Box>

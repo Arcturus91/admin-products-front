@@ -1,19 +1,7 @@
-
-
-import { RegisterProduct} from "../components";
-
-
-
+import { RegisterProduct } from "../components";
 
 const RegisterProductPage = () => {
-
-
-
   return <RegisterProduct />;
-
 };
 
-export default RegisterProductPage
-
-
-
+export default RegisterProductPage;
