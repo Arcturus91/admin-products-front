@@ -1,17 +1,16 @@
 
-import { useState, useEffect } from "react";
+
 import { RegisterProduct} from "../components";
-import { getAllProducts } from "../services/crud-ws";
+import { ProductList } from "../components";
+
 
 
 const HomePage = () => {
 
-  useEffect(() => {
 
-    getAllProducts().then((data) => {console.log(data);})
-  },[])
 
-  return <RegisterProduct />;
+
+  return <ProductList/>
 };
 
 export default HomePage;

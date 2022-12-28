@@ -113,11 +113,6 @@ export default function RegisterProduct() {
               onSubmit={handleSubmit}
               sx={{ mt: 1 }}
             >
-              {/*            "name":"Shampoo",
-    "category":{"name":"Shampoo","slug":"shamp"},
-    "brand":{"name":"jhonson","slug":"shampjhon"},
-        "slug":"shamp",
-    "status":"Disponible" */}
               <TextField
                 margin="normal"
                 required
